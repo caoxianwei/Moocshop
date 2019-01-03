@@ -14,8 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
+from django.views.static import serve
+
+from Moocshop.settings import MEDIA_ROOT
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # 处理图片显示的url,使用Django自带serve,传入参数告诉它去哪个路径找，我们有配置好的路径MEDIAROOT
+    re_path('media/(?P<path>.*)', serve, {"document_root": MEDIA_ROOT }),
 ]
