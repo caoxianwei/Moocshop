@@ -91,7 +91,7 @@ DATABASES = {
         'USER': 'root',
         "PASSWORD": '',
         "HOST": '127.0.0.1',
-        'OPTIONS': { 'init_command': 'SET storage_engine=INNODB;' }
+        # 'OPTIONS': { 'init_command': 'SET storage_engine=INNODB;' }
     }
 }
 
