@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'DjangoUeditor',
+    'crispy_forms',
+    'rest_framework',
     'goods',
     'users',
     'trade',
