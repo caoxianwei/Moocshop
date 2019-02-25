@@ -11,6 +11,7 @@ from .serializers import GoodsSerializer
 from rest_framework.views import APIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
+from rest_framework import viewsets
 
 from .models import Goods
 
@@ -44,7 +45,10 @@ class GoodsPagination(PageNumberPagination):
 #     def get(self, request, *args, **kwargs):
 #         return self.list(request, *args, **kwargs)
 
-class GoodsListView(generics.ListAPIView):
+class GoodsListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    """
+    商品列表页，分页，搜索，过滤，排序,取某一个具体商品的详情
+    """
     queryset = Goods.objects.all()
     pagination_class = GoodsPagination
     serializer_class = GoodsSerializer
