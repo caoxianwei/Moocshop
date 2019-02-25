@@ -9,9 +9,19 @@ from rest_framework import generics
 
 from .serializers import GoodsSerializer
 from rest_framework.views import APIView
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
 from .models import Goods
+
+# 商品列表分页类
+class GoodsPagination(PageNumberPagination):
+    page_size = 12
+    # 向后台要多少条
+    page_size_query_param = 'page_size'
+    # 定制多少页的参数
+    page_query_param = "page"
+    max_page_size = 100
 
 # class GoodsListView(APIView):
 #     def get(self, request, format=None):
@@ -36,4 +46,5 @@ from .models import Goods
 
 class GoodsListView(generics.ListAPIView):
     queryset = Goods.objects.all()
+    pagination_class = GoodsPagination
     serializer_class = GoodsSerializer
