@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'DjangoUeditor',
     'crispy_forms',
     'rest_framework',
+    'django_filters',
     'goods',
     'users',
     'trade',

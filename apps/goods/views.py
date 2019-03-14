@@ -12,7 +12,10 @@ from rest_framework.views import APIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework import viewsets
+from rest_framework import filters
+from django_filters.rest_framework import DjangoFilterBackend
 
+from goods.filters import GoodsFilter
 from .models import Goods
 
 # 商品列表分页类
@@ -49,6 +52,21 @@ class GoodsListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     """
     商品列表页，分页，搜索，过滤，排序,取某一个具体商品的详情
     """
-    queryset = Goods.objects.all()
     pagination_class = GoodsPagination
     serializer_class = GoodsSerializer
+    queryset = Goods.objects.all()
+
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
+    filterset_fields = ('name', 'shop_price')
+
+    filter_class = GoodsFilter
+
+    search_fields = ('name', 'goods_brief', 'goods_desc')
+
+    ordering_fields = ('sold_num', 'shop_price')
+
+    # def get_queryset(self):
+    #     price_min =self.request.query_params.get('price_min', 0)
+    #     if price_min:
+    #         Goods.objects.filter(shop_price__gt=int(price_min))
+    #     return Goods.objects.filter(shop_price__gt=100)
