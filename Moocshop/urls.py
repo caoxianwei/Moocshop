@@ -24,6 +24,8 @@ from Moocshop.settings import MEDIA_ROOT
 # from goods.views_base import GoodsListView
 # from goods.views import GoodsListView
 from goods.views import GoodsListViewSet, CategoryViewset
+from rest_framework.authtoken import views
+from rest_framework_jwt.views import obtain_jwt_token
 
 router = DefaultRouter()
 
@@ -47,4 +49,8 @@ urlpatterns = [
 
     path('docs/', include_docs_urls(title='mtianyan超市文档')),
     path('api-auth/', include('rest_framework.urls')),
+
+
+    # jwt的token认证
+    path('login/', obtain_jwt_token),
 ]

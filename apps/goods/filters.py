@@ -1,9 +1,6 @@
 # -*- coding:utf-8 _*-
 from django.db.models import Q
 
-__author__ = 'mtianyan'
-__date__ = '2018/03/03 00:44'
-
 from django_filters import rest_framework as filters
 from goods.models import Goods
 from django.utils.translation import ugettext_lazy as _
@@ -17,7 +14,7 @@ class GoodsFilter(filters.FilterSet):
     pricemin = filters.NumberFilter(name="shop_price", lookup_expr='gte', help_text=_('大于等于本店价格'))
     pricemax = filters.NumberFilter(name="shop_price", lookup_expr='lte', help_text=_('小于等于本店价格'))
     # 行为: 名称中包含某字符，且字符不区分大小写
-    # name = filters.CharFilter(name="name" ,lookup_expr="icontains")
+    name = filters.CharFilter(name="name" ,lookup_expr="icontains")
     top_category = filters.NumberFilter(name="category", method='top_category_filter')
 
     def top_category_filter(self, queryset, value):
